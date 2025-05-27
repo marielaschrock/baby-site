@@ -8,7 +8,7 @@
     <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
     <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Georgia&display=swap" rel="stylesheet">
-    <script src='main.js'></script>
+   
 </head>
 <body>
     <div class="hero polls-hero">
@@ -122,7 +122,7 @@
 
             <div class="poll-question" data-poll-name="babyWeight">
                 <p>What's your bet on the baby's weight? (e.g., 7 lbs 5 oz)</p>
-                <input type="text" name="babyWeightInput" placeholder="Enter weight here (e.g., 7 lbs 5 oz)" required>
+                <input type="text" name="babyWeightInput" placeholder="Enter weight here (e.g., 7 lbs 5 oz)">
                 <br>
                 <button type="submit" class="polls-button" data-poll="babyWeight">Place Bet</button>
                 <div class="voter-records" id="records-babyWeight">
@@ -133,7 +133,7 @@
 
             <div class="poll-question" data-poll-name="deliveryDateTime">
                 <p>When do you think the baby will arrive?</p>
-                <input type="datetime-local" name="deliveryDateTimeInput" required>
+                <input type="datetime-local" name="deliveryDateTimeInput">
                 <br>
                 <button type="submit" class="polls-button" data-poll="deliveryDateTime">Place Bet</button>
                 <div class="voter-records" id="records-deliveryDateTime">
@@ -146,6 +146,8 @@
         <div id="result" style="margin-top: 20px;"></div>
 
         <a href="index.html" class="polls-button">Return to Main Floor</a>
+
+        <script src='main.js'></script>
     </div>
 </body>
 </html>

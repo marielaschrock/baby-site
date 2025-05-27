@@ -58,10 +58,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const submitButton = pollQuestionDiv.querySelector(`.polls-button[data-poll="${pollName}"]`);
 
         // Check if it's a text input poll (weight or datetime)
-        const isTextInputPoll = pollQuestionDiv.querySelector('input[type="text"]') || pollQuestionDiv.querySelector('input[type="datetime-local"]');
+        // This check is now more precise: only if the poll name matches the expected input type
+        const isTextInputPoll = (pollName === 'babyWeight' && pollQuestionDiv.querySelector('input[type="text"]')) ||
+                                (pollName === 'deliveryDateTime' && pollQuestionDiv.querySelector('input[type="datetime-local"]'));
+
 
         if (isTextInputPoll) {
-            const pollInput = isTextInputPoll; // The text/datetime input element
+            const pollInput = pollQuestionDiv.querySelector('input[type="text"]') || pollQuestionDiv.querySelector('input[type="datetime-local"]'); // Get the specific input element
+            if (!pollInput) return; // Should not happen if isTextInputPoll is true, but good safeguard
 
             if (currentVoterName && pollData.voterRecords[currentVoterName]) {
                 // If already voted, disable input and button, show their bet
@@ -78,7 +82,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 // If not voted, enable input and button, clear previous value
                 pollInput.disabled = false;
                 // Only clear if the input is not disabled by a previous vote, otherwise it would clear the displayed vote.
-                // We don't want to clear if the name changes to one that hasn't voted.
                 if (!pollInput.disabled) {
                      pollInput.value = ''; // Clear value if re-enabled
                 }
@@ -101,14 +104,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 const percentage = totalVotes === 0 ? 0 : (voteCount / totalVotes) * 100;
 
                 const bar = document.getElementById(`${pollName}-${optionValue}-bar`);
-                const percentageSpan = bar ? bar.nextElementSibling.querySelector('.poll-percentage') : null; // No percentage span for now
-                const countSpan = bar ? bar.nextElementSibling.querySelector('.poll-count') : null; // No count span for now
+                const percentageSpan = bar ? bar.nextElementSibling.querySelector('.poll-percentage') : null;
+                const countSpan = bar ? bar.nextElementSibling.querySelector('.poll-count') : null;
 
                 if (bar) {
                     bar.style.width = `${percentage}%`;
                 }
-                // These spans are not in the current HTML for poll labels, so this part won't update anything visible.
-                // If you want to show percentage/count next to the label, you'd need to add them in HTML.
                 if (percentageSpan) {
                     percentageSpan.textContent = `${percentage.toFixed(1)}%`;
                 }
@@ -142,6 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Update voter records display for ALL poll types
         updateVoterDisplay(pollName, pollData.voterRecords);
     };
+
 
     // Function to update the displayed list of voters
     const updateVoterDisplay = (pollName, voterRecords) => {
@@ -212,20 +214,21 @@ document.addEventListener('DOMContentLoaded', () => {
             const pollQuestionDiv = document.querySelector(`.poll-question[data-poll-name="${pollName}"]`);
 
             // --- Handle text input polls (Weight, Date/Time) ---
-            const pollInputText = pollQuestionDiv.querySelector('input[type="text"]');
-            const pollInputDateTime = pollQuestionDiv.querySelector('input[type="datetime-local"]');
             let inputValue = '';
             let isTextInputPoll = false;
+            const pollInputText = pollQuestionDiv.querySelector('input[type="text"]');
+            const pollInputDateTime = pollQuestionDiv.querySelector('input[type="datetime-local"]');
 
-            if (pollInputText) {
+            // Determine if this is a text input poll based on the clicked button's pollName
+            if (pollName === 'babyWeight' && pollInputText) {
                 inputValue = pollInputText.value.trim();
                 isTextInputPoll = true;
-            } else if (pollInputDateTime) {
+            } else if (pollName === 'deliveryDateTime' && pollInputDateTime) {
                 inputValue = pollInputDateTime.value.trim();
                 isTextInputPoll = true;
             }
 
-            if (isTextInputPoll) {
+            if (isTextInputPoll) { // This block will now only execute if the specific text/datetime poll was submitted
                 if (inputValue === '') {
                     alert('Please enter your bet before placing it!');
                     return;
