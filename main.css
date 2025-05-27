@@ -52,13 +52,13 @@ h1{
     display: inline-block;
     margin-top: 10px;
     padding: 10px 20px;
-    background-color: #006400;
-    color: #FFD700;
+    background-color: #84678d;
+    color: #ffffff;
     text-decoration: none;
     font-size: 1.3em;
     border-radius: 8px;
     transition: background 0.3s ease, transform 0.1s ease;
-    border: 2px solid #FFD700;
+    border: 2px solid #ffffff;
     box-shadow: 0 4px 8px rgba(180, 23, 23, 0.3);
 }
 
