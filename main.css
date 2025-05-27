@@ -52,7 +52,7 @@ h1{
     display: inline-block;
     margin-top: 10px;
     padding: 10px 20px;
-    background-color: #84678d;
+    background-color: #bc93cf;
     color: #ffffff;
     text-decoration: none;
     font-size: 1.3em;
@@ -105,7 +105,7 @@ h1{
     margin-bottom: 20px;
     font-size: 1.7em !important;
     font-family: "Notable", sans-serif;
-    color: #d6c8cc;
+    color: #dbccd1;
     font-weight: bold;
     text-shadow: 2px 2px 2px rgba(0,0,0,0.8);
 }
@@ -180,4 +180,88 @@ h1{
 
 .voted .poll-bar-container {
     margin-bottom: 5px;
+}
+
+.global-voter-name-section {
+    margin: 20px auto 40px auto; /* Margin top/bottom, auto left/right for centering */
+    width: 80%; /* Match poll-question width */
+    max-width: 500px;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid #FFD700;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+    text-align: center;
+}
+
+.global-voter-name-section label {
+    display: block;
+    margin-bottom: 10px;
+    color: #FFD700;
+    font-weight: bold;
+    font-size: 1.3em; /* Slightly larger than before */
+}
+
+.global-voter-name-section input[type="text"] {
+    width: calc(100% - 20px);
+    padding: 12px; /* Slightly more padding */
+    border-radius: 5px;
+    border: 1px solid #FFD700;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #E0E0E0;
+    font-size: 1.1em; /* Slightly larger font */
+    text-align: center;
+}
+
+.global-voter-name-section input[type="text"]::placeholder {
+    color: rgba(224, 224, 224, 0.7);
+}
+
+
+/* Styles for the voter records display (unchanged from last time) */
+.voter-records {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 215, 0, 0.3);
+    color: #E0E0E0;
+    text-align: left;
+    display: none; /* Hidden by default, shown by JS if records exist */
+}
+
+.voter-records h3 {
+    color: #FFD700;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.voter-records ul {
+    list-style: none;
+    padding: 0;
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+.voter-records ul li {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-left: 3px solid #006400;
+    padding: 8px 10px;
+    margin-bottom: 5px;
+    border-radius: 3px;
+    font-size: 0.95em;
+    color: #E0E0E0;
+}
+.polls-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Adjust minmax as needed */
+    gap: 30px; /* Space between poll boxes */
+    padding: 20px;
+    max-width: 1200px; /* Optional: limit overall width of the grid */
+    margin: 0 auto; /* Center the grid */
+}
+
+/* Adjustments for the poll-question within the grid */
+.polls-grid .poll-question {
+    width: auto; /* Let grid control width */
+    margin: 0; /* Remove existing margins */
 }
